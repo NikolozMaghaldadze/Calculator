@@ -3,7 +3,6 @@ let greyButtons = document.querySelectorAll(".grey");
 let yellowButtons = document.querySelectorAll(".yellow");
 let prevOpperand = document.querySelector(".previous-opperand");
 let display = document.querySelector(".display");
-
 let number = "";
 let numberPrev = "";
 let opperation = "";
@@ -22,6 +21,7 @@ display.textContent = " ";
 greyButtons.forEach((el) => {
   el.addEventListener("click", function () {
     if (el.textContent === "AC") {
+      opperation = " ";
       number = "";
       display.textContent = " ";
       prevOpperand.textContent = " ";
@@ -33,13 +33,14 @@ greyButtons.forEach((el) => {
         opperation = "-";
         clickCount++;
       }
-      display.textContent = " ";
-      prevOpperand.textContent = number;
-      numberPrev = number;
-      number = "";
+    } else if (el.textContent === "%") {
+      opperation = "%";
     }
+    prevOpperand.textContent = `${number} ${opperation}`;
+    display.textContent = " ";
+    numberPrev = number;
+    number = "";
   });
-  console.log(el.textContent);
 });
 
 //number keys
@@ -61,9 +62,12 @@ yellowButtons.forEach((el) => {
       if (opperation === "+") {
         prevOpperand.textContent = "";
         display.textContent = stringToTypePlus(numberPrev, number);
-      } else {
+      } else if (opperation === "-") {
         prevOpperand.textContent = "";
         display.textContent = stringToTypeMinus(numberPrev, number);
+      } else if (opperation === "%") {
+        prevOpperand.textContent = "";
+        display.textContent = modulousDivision(numberPrev, number);
       }
     }
   });
@@ -83,4 +87,12 @@ function stringToTypeMinus(number1, number2) {
   let final = toNumber1 - toNumber2;
   console.log(final);
   return final;
+}
+
+function modulousDivision(number1, number2) {
+  return number1 % number2;
+}
+
+function division(number1, number2) {
+  return number1 / number2;
 }
