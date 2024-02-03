@@ -54,7 +54,7 @@ numberButtons.forEach((el) => {
     display.textContent = number;
   });
 });
-
+console.log("raghaca ar mushaobs kargad!");
 //opperation keys
 yellowButtons.forEach((el) => {
   el.addEventListener("click", function () {
